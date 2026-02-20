@@ -1,0 +1,7 @@
+0000000000000000000000000000000000000000 48d3eec3a6f9aa419ce0cf3e237524874f44d53a ruthram123 <ruthramsocialmedia@gmail.com> 1766040912 +0530	commit (initial): 18-12
+48d3eec3a6f9aa419ce0cf3e237524874f44d53a 48d3eec3a6f9aa419ce0cf3e237524874f44d53a ruthram123 <ruthramsocialmedia@gmail.com> 1766040918 +0530	Branch: renamed refs/heads/master to refs/heads/main
+48d3eec3a6f9aa419ce0cf3e237524874f44d53a 5e5faf9ffaf85cea9b0a57a6025f10d5e360a89e ruthram123 <ruthramsocialmedia@gmail.com> 1766042816 +0530	commit: api-added
+5e5faf9ffaf85cea9b0a57a6025f10d5e360a89e a90e354513fd2e38a11d4b0b8d18535a45a79e4b ruthram123 <ruthramsocialmedia@gmail.com> 1766043604 +0530	commit: 9-question strict
+a90e354513fd2e38a11d4b0b8d18535a45a79e4b bc3c15b5ac0f2242a9de5748a9194cd96f49b42d ruthram123 <ruthramsocialmedia@gmail.com> 1766043898 +0530	commit: 9-question strict-on import
+bc3c15b5ac0f2242a9de5748a9194cd96f49b42d d8ce23d4fdf51c45e4cd307f858db09b737074b0 ruthram123 <ruthramsocialmedia@gmail.com> 1771218007 +0530	commit: Update backend URL to Render
+d8ce23d4fdf51c45e4cd307f858db09b737074b0 70b3938e1fc04bf9054cbc56a59d03b450d3cae2 ruthram123 <ruthramsocialmedia@gmail.com> 1771227032 +0530	commit: feat: Configure backend URL for production

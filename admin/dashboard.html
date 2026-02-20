@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - School Chatbot Admin</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: var(--spacing-md);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #e2e8f0;
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="nav-header">
+            <h1>🤖 Chatbot Admin</h1>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <span id="user-email" style="font-size: 0.875rem; color: var(--text-secondary);"></span>
+                <button onclick="logout()" class="btn btn-outline">Logout</button>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-links" style="margin-bottom: var(--spacing-md);">
+            <a href="dashboard.html" class="nav-link active">Dashboard</a>
+            <a href="intents.html" class="nav-link">Intents</a>
+            <a href="import.html" class="nav-link">Import</a>
+            <a href="duplicates.html" class="nav-link">Duplicates</a>
+        </nav>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="stat-total">--</div>
+                <div class="stat-label">Total Intents</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-published" style="color: var(--success);">--</div>
+                <div class="stat-label">Published</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-draft" style="color: var(--warning);">--</div>
+                <div class="stat-label">Drafts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-flags" style="color: var(--danger);">--</div>
+                <div class="stat-label">Duplicate Flags</div>
+            </div>
+        </div>
+
+        <!-- Recent Activity / Quick Actions -->
+        <div class="card">
+            <h3>🚀 Quick Actions</h3>
+            <div style="display: flex; gap: var(--spacing-sm); margin-top: var(--spacing-sm);">
+                <button onclick="window.location.href='intents.html?action=new'" class="btn btn-primary">+ New
+                    Intent</button>
+                <button onclick="window.location.href='import.html'" class="btn btn-outline">📥 Import JSON</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabaseClient.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

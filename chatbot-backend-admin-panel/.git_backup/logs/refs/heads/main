@@ -1,0 +1,6 @@
+0000000000000000000000000000000000000000 20cb43f8d7c46a6f396531c2776af08abc3f7346 ruthram123 <ruthramsocialmedia@gmail.com> 1770956955 +0530	clone: from https://github.com/Ruthramsocialmedia/chatbot-backend-admin-panel.git
+20cb43f8d7c46a6f396531c2776af08abc3f7346 4cbef06a1c281855dbda705e6b07ae27a19beb5f ruthram123 <ruthramsocialmedia@gmail.com> 1771217926 +0530	commit: Update for deployment: backend changes
+4cbef06a1c281855dbda705e6b07ae27a19beb5f 98e3796c82cb6b5e418c175132c3af11a2dedaf2 ruthram123 <ruthramsocialmedia@gmail.com> 1771218739 +0530	commit: Fix: Switch to text-embedding-004 to resolve 404 error
+98e3796c82cb6b5e418c175132c3af11a2dedaf2 362851061264dd615bd54ce1069bad01cbff3873 ruthram123 <ruthramsocialmedia@gmail.com> 1771224709 +0530	commit: feat: performance opt & multi-key support
+362851061264dd615bd54ce1069bad01cbff3873 8f09345e8d343fa98efcb6d27d46660a8d6ed447 ruthram123 <ruthramsocialmedia@gmail.com> 1771225535 +0530	commit: fix: update embedding model to text-embedding-004 to resolve Render 404
+8f09345e8d343fa98efcb6d27d46660a8d6ed447 c5cfdbeedc706440caa21891cbe2cef00b2ce5f4 ruthram123 <ruthramsocialmedia@gmail.com> 1771225877 +0530	commit: feat: Add multi-key support and performance optimization

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intents - School Chatbot Admin</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        .intent-editor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .editor-content {
+            background: var(--bg-card);
+            padding: var(--spacing-lg);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .question-list {
+            display: grid;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="nav-header">
+            <h3>Knowledge Base</h3>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button onclick="logout()" class="btn btn-outline">Logout</button>
+            </div>
+        </header>
+
+        <!-- Nav -->
+        <nav class="nav-links" style="margin-bottom: var(--spacing-md);">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="intents.html" class="nav-link active">Intents</a>
+            <a href="import.html" class="nav-link">Import</a>
+            <a href="duplicates.html" class="nav-link">Duplicates</a>
+        </nav>
+
+        <!-- Actions -->
+        <div class="card">
+            <div class="header-actions"
+                style="margin-bottom: var(--spacing-md); display: flex; justify-content: space-between; align-items: center;">
+                <h2>Manage Knowledge Base</h2>
+                <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="search-input" placeholder="Search intents..." onkeyup="fetchIntents()"
+                        style="margin-bottom: 0; width: 200px;">
+                    <select id="status-filter" onchange="fetchIntents()"
+                        style="margin-bottom: 0; padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border);">
+                        <option value="all">All Status</option>
+                        <option value="draft">Drafts</option>
+                        <option value="published">Published</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="openEditor()">+ New Intent</button>
+                    <button class="btn btn-warning" id="pub-all-btn" onclick="publishAllDrafts()"
+                        style="color: black;">Publish All Drafts</button>
+                </div>
+            </div>
+
+            <!-- Bulk Toolbar -->
+            <div id="bulk-toolbar" class="hidden"
+                style="background: var(--bg-primary); padding: 0.75rem; border-radius: 8px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border);">
+                <span id="selected-count" style="font-weight: 700; color: var(--primary);">0 selected</span>
+                <button id="bulk-pub-btn" class="btn btn-warning" style="color: black; font-size: 0.85rem;"
+                    onclick="publishSelected()">Publish Selected</button>
+            </div>
+
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr
+                        style="text-align: left; border-bottom: 2px solid var(--border); background: var(--bg-primary);">
+                        <th style="padding: 1rem 0.5rem; text-align: center; width: 40px;">
+                            <input type="checkbox" onclick="toggleSelectAll(this)">
+                        </th>
+                        <th style="padding: 1rem 0.5rem;">Intent Name</th>
+                        <th style="padding: 1rem 0.5rem;">Status</th>
+                        <th style="padding: 1rem 0.5rem;">Ver.</th>
+                        <th style="padding: 1rem 0.5rem;">Updated</th>
+                        <th style="padding: 1rem 0.5rem; text-align: right;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="intent-list-body">
+                    <!-- Populated by JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Editor Modal -->
+    <div id="editor-modal" class="intent-editor hidden">
+        <div class="editor-content">
+            <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-md);">
+                <h2>Edit Intent</h2>
+                <button class="btn btn-outline" onclick="closeEditor()">Close</button>
+            </div>
+
+            <form id="intent-form">
+                <input type="hidden" id="intent-id">
+
+                <div style="margin-bottom: var(--spacing-md);">
+                    <label>Intent Name (Slug)</label>
+                    <input type="text" id="intent-name" required placeholder="e.g. hostel_fees">
+                </div>
+
+                <div style="margin-bottom: var(--spacing-md);">
+                    <label><strong>Answer</strong> (The one single truth)</label>
+                    <textarea id="intent-answer" rows="3" required
+                        placeholder="Enter the official answer here..."></textarea>
+                </div>
+
+                <div style="margin-bottom: var(--spacing-md);">
+                    <label><strong>9 Variations</strong> (Exactly 9 required for publish)</label>
+                    <div id="questions-container" class="question-list">
+                        <!-- 9 inputs generated by JS -->
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <span id="save-status"
+                        style="margin-right: 1rem; color: var(--text-secondary); font-size: 0.9rem;"></span>
+                    <button class="btn btn-secondary" onclick="closeEditor()">Cancel</button>
+                    <button class="btn btn-primary" onclick="window.saveDraft()">Save Draft</button>
+                    <button class="btn btn-warning" onclick="window.publishIntent()" style="color: black;">Publish /
+                        Sync Embeddings</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabaseClient.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/intents.js"></script>
+</body>
+
+</html>

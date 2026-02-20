@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import - School Chatbot Admin</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        .drop-zone {
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: var(--spacing-lg);
+            text-align: center;
+            background: var(--bg-card);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .drop-zone:hover {
+            border-color: var(--primary);
+            background: #f8fafc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="nav-header">
+            <h3>Import Data</h3>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button onclick="logout()" class="btn btn-outline">Logout</button>
+            </div>
+        </header>
+
+        <!-- Nav -->
+        <nav class="nav-links" style="margin-bottom: var(--spacing-md);">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="intents.html" class="nav-link">Intents</a>
+            <a href="import.html" class="nav-link active">Import</a>
+            <a href="duplicates.html" class="nav-link">Duplicates</a>
+        </nav>
+
+        <div class="card">
+            <h2>📤 Bulk Import JSON</h2>
+            <p style="margin-bottom: var(--spacing-md); color: var(--text-secondary);">
+                Select a `school-data.json` file to import. Questions will be imported as <strong>Drafts</strong>. Use
+                the Duplicate tool to clean them up before publishing.
+            </p>
+
+            <div id="drop-zone" class="drop-zone">
+                <p>Drag & Drop JSON file here or Click to Upload</p>
+                <input type="file" id="file-input" accept=".json" class="hidden">
+            </div>
+
+            <div id="preview-area" class="hidden" style="margin-top: var(--spacing-md);">
+                <h3>Preview</h3>
+                <p id="stats-preview"></p>
+                <button id="btn-import" class="btn btn-primary" style="margin-top: 1rem;">Start Import</button>
+                <div id="import-log"
+                    style="margin-top: 1rem; max-height: 200px; overflow-y: auto; font-family: monospace; border: 1px solid var(--border); padding: 0.5rem;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabaseClient.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/import.js"></script>
+</body>
+
+</html>
